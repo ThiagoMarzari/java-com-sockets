@@ -17,6 +17,21 @@ public class FuncionarioDao {
         this.conn = this.conexao.getConexao();
     }
     
+     public void inserir (Funcionario funcionario){
+     String sql = "INSERT INTO FUNCIONARIO (nome,idade,cargo_id) VALUES (?,?,?);";
+     
+     try{
+         PreparedStatement stmt = this.conn.prepareStatement(sql);
+         stmt.setString(1,funcionario.getNome());
+         stmt.setInt(2, funcionario.getIdade());
+         stmt.setInt(3, funcionario.getCargo().getId());
+         
+         stmt.execute();
+     }catch (Exception ex){
+         System.out.println("Erro ao inserir funcionario: "+ex.getMessage());
+     }
+ }
+    
     public Funcionario getFuncionario(int id) {
     String sql = "SELECT * FROM FUNCIONARIO WHERE id = ?;";
     try {

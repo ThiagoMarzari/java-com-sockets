@@ -1,6 +1,7 @@
 
-package servidor;
+package servidor2;
 
+import servidor.*;
 import beans.Funcionario;
 import dao.FuncionarioDao;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ import java.net.Socket;
 
 public class Servidor {
     public static void main(String[] args) {
-        int porta = 12345;
+        int porta = 1234;
         
         try (ServerSocket serverSocket = new ServerSocket(porta)) {
             System.out.println("Servidor iniciado e aguardando conexões..." + porta);
