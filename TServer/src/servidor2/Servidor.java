@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 public class Servidor {
     public static void main(String[] args) {
         int porta = 1234;
@@ -32,7 +31,6 @@ public class Servidor {
                     
                     out.writeObject(f);
                     */
-                    
                     
                     Thread thread = new ThreadServer(socket);
                     thread.start();
