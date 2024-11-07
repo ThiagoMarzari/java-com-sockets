@@ -1,10 +1,13 @@
 
 package servidor;
 
+import beans.Funcionario;
+import dao.FuncionarioDao;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import javax.net.ssl.SSLServerSocket;
 
 
@@ -19,15 +22,14 @@ public class Servidor {
                 try (Socket socket = serverSocket.accept()) {
                     System.out.println("Conexao aceita de " + socket.getInetAddress());
                     
+                    ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream()); //Saida
                     ObjectInputStream in = new ObjectInputStream(socket.getInputStream()); //Entrada
                     
-                    //TODO: Inserir funcionario no banco de dados
+                    int idFuncionario = in.readInt();
+                    FuncionarioDao fDao = new FuncionarioDao();
+                    Funcionario f = fDao.getFuncionario(idFuncionario);
                     
-                    String resposta = "Funcionario salvo no banco de dados!";
-                    
-                    ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                    out.writeObject(resposta);
-                    
+                    out.writeObject(f);
                 } catch (Exception e) {
                     System.out.println("Erro ao aceitar conexao do cliente!" + e.getMessage());
                 }
